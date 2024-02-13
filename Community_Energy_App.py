@@ -28,35 +28,35 @@ st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allo
 
 # Introduction --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Introduction")
-st.write("This web app is meant as a support tool for the article released by SIB titled ______. It displays publically available data on the energy performance of Non - Domestic community buildings in England. Please see the article for further analysis on this data.")
-st.write("This is critical to understand as we work towards meeting the law set in 2019 to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for Energy Performance Certificate (EPC) ratings, a measure of how efficiently a building uses energy. A ‘C’ rating is commonly suggested as the minimum required for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for renting non-domestic properties by 2030.")
+st.write("This web app is designed as a support tool for the article released by SIB titled ______. It displays publically available data on the energy performance of non-domestic community buildings in England. Please see the article for further analysis on this data.")
+st.write("It is critical to understand energy eficiency as we work towards meeting the law set in 2019 to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for Energy Performance Certificate (EPC) ratings. A ‘C’ rating is commonly suggested as the minimum required for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for renting non-domestic properties by 2030.")
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # gloassary --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Glossarry:")
-st.write("EPC (Energy Performance Certificate) - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
-st.write("EPC Score - A score usually iven from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (i.e. A+) is given to any building that is net zero.")
-st.write("IMD (Index of Multiple Deprivation) - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
+st.write("- EPC (Energy Performance Certificate) - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
+st.write("- EPC Score - A score given from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (aka. A+) is given to any building that is net zero. Please note, it is possible to be given a score outide the 0-150 range if your building is an outlier in some way, but this does apply to the majority of buildings.")
+st.write("- IMD (Index of Multiple Deprivation) - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # Sidebar with search functionality --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Checkbox for filtering or displaying the entire dataset
 st.sidebar.header('Search your Local Authority')
 
 # Checkbox for filtering or displaying the entire dataset
 filter_option = st.sidebar.checkbox('Filter Data')
 
 if filter_option:
-    # Text input for Local Authority search
-    search_local_authority = st.sidebar.text_input('Type Local Authority', '')
+    # Selectbox for Local Authority
+    selected_local_authority = st.sidebar.selectbox('Type or select Local Authority', df['Local Authority'].unique())
 
-    # Filter DataFrame based on searched Local Authority
-    if search_local_authority:
-        filtered_df = df[df['Local Authority'].str.contains(search_local_authority, case=False, na=False) | (df['Local Authority'].isna())]
-    else:
-        selected_local_authority = st.sidebar.selectbox('Select Local Authority', df['Local Authority'].unique())
-        filtered_df = df[df['Local Authority'] == selected_local_authority]
+    # Filter DataFrame based on selected Local Authority
+    filtered_df = df[df['Local Authority'] == selected_local_authority]
+    
+    if filtered_df.empty:
+        st.sidebar.error(f"Whoops: '{selected_local_authority}' doesn't exist in the dataset.")
 else:
     # If not filtering, display the entire dataset
     filtered_df = df
