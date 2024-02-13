@@ -17,7 +17,7 @@ df = pd.read_csv(fp)
 
 
 # set titles/icon/layout ----------------------------------
-st.set_page_config(page_title="Community Energy App")
+st.set_page_config(page_title="Community Energy App", page_icon=':globe_with_meridians:')
 
 #set title -----------------------------------------------------------------------------------
 st.title('Community Energy App')
