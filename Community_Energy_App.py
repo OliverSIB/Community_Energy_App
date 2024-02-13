@@ -25,17 +25,23 @@ st.title('Community Energy App')
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 #--------------------------------------------------------------------------------------------
 
+
+# Introduction --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Introduction")
 st.write("This web app is meant as a support tool for the article released by SIB titled ______. It displays publically available data on the energy performance of Non - Domestic community buildings in England. Please see the article for further analysis on this data.")
 st.write("This is critical to understand as we work towards meeting the law set in 2019 to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for Energy Performance Certificate (EPC) ratings, a measure of how efficiently a building uses energy. A ‘C’ rating is commonly suggested as the minimum required for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for renting non-domestic properties by 2030.")
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# gloassary 
+# gloassary --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Glossarry:")
 st.write("EPC (Energy Performance Certificate) - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
 st.write("EPC Score - A score usually iven from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (i.e. A+) is given to any building that is net zero.")
 st.write("IMD (Index of Multiple Deprivation) - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Sidebar with search functionality
+
+# Sidebar with search functionality --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 st.sidebar.header('Search your Local Authority')
 
 # Checkbox for filtering or displaying the entire dataset
@@ -54,11 +60,15 @@ if filter_option:
 else:
     # If not filtering, display the entire dataset
     filtered_df = df
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
 
 # Main content
 st.title('Grouping and Searching DataFrame')
 
-# Display the selected or searched Local Authority
+# Display the selected or searched Local Authority --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if filter_option:
     if search_local_authority:
         st.write(f'### Filtered DataFrame for "{search_local_authority}":')
@@ -66,9 +76,10 @@ if filter_option:
         st.write(f'### Filtered DataFrame for "{selected_local_authority}":')
 else:
     st.write(f'### Entire DataFrame:')
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# breakdown
+# breakdown for LA --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 col1, col2 = st.columns((2))
 st.header('EPC Breakdown')
 with col1:
@@ -81,8 +92,10 @@ with col2:
     st.write('Mean IMD:', imd_epc)
     floor_epc = filtered_df['FLOOR_AREA'].mean().round(1)
     st.write('Mean floor area (m2)', floor_epc)
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Calculate percentage with one decimal place and create a bar chart for ASSET_RATING_BAND breakdown
+
+# Calculate percentage with one decimal place and create a bar chart for ASSET_RATING_BAND breakdown --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 epc_df = filtered_df.groupby(by=["ASSET_RATING_BAND"], as_index=False)["BUILDING_REFERENCE_NUMBER"].count()
 epc_df['Percentage'] = (epc_df['BUILDING_REFERENCE_NUMBER'] / epc_df['BUILDING_REFERENCE_NUMBER'].sum() * 100).round(1)
 
@@ -91,17 +104,26 @@ fig = px.bar(epc_df, x="ASSET_RATING_BAND", y="Percentage", text="Percentage",
              title="Percentage of EPCs by Rating Band")
 fig.update_traces(texttemplate='%{text}%', textposition='outside')
 st.plotly_chart(fig, use_container_width=True, height=200)
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Create a new DataFrame for the selected region
+
+
+
+
+# Create a new DataFrame for the selected region --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 selected_region_df = df[df['Region'].isin(filtered_df['Region'].unique())]
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# show region data for selection
+
+
+# show region data for selection # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("What does your region look like?")
 your_region = filtered_df['Region'].unique()
 st.text('Selected region: ' + str(your_region))
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-# breakdown
+# breakdown stats for region --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 col1, col2 = st.columns((2))
 with col1:
     region_mode_EPC = selected_region_df["ASSET_RATING_BAND"].mode().iloc[0]
@@ -113,8 +135,14 @@ with col2:
     st.write('Mean IMD:', region_imd_epc)
     region_floor_epc = selected_region_df['FLOOR_AREA'].mean().round(1)
     st.write('Mean floor area (m2)', region_floor_epc)
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# visuals
+
+
+
+
+
+# visuals for region --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 region_df = selected_region_df.groupby(by=["ASSET_RATING_BAND"], as_index=False)["BUILDING_REFERENCE_NUMBER"].count()
 region_df['Percentage'] = (region_df['BUILDING_REFERENCE_NUMBER'] / region_df['BUILDING_REFERENCE_NUMBER'].sum() * 100).round(1)
 
@@ -123,6 +151,25 @@ fig2 = px.bar(region_df, x="ASSET_RATING_BAND", y="Percentage", text="Percentage
              title="Percentage of EPCs by Rating Band in Selected Region")
 fig2.update_traces(texttemplate='%{text}%', textposition='outside')
 st.plotly_chart(fig2, use_container_width=True, height=200)
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+# make a table for LA breakdown ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+cross_table = pd.crosstab(filtered_df['Local Authority'], filtered_df['ASSET_RATING_BAND'])
+# Display the table
+st.header('Table: Region vs Asset rating Band (EPC)')
+st.write(cross_table)
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# make a table for LA breakdown ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+cross_table2 = pd.crosstab(filtered_df['Local Authority'], filtered_df['IMD'])
+# Display the table
+st.header('Table: IMD vs Asset rating Band (EPC)')
+st.write(cross_table2)
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
