@@ -25,6 +25,15 @@ st.title('Community Energy App')
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 #--------------------------------------------------------------------------------------------
 
+st.header("Introduction")
+st.write("This web app is meant as a support tool for the article released by SIB titled ______. It displays publically available data on the energy performance of Non - Domestic community buildings in England. Please see the article for further analysis on this data.")
+st.write("This is critical to understand as we work towards meeting the law set in 2019 to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for Energy Performance Certificate (EPC) ratings, a measure of how efficiently a building uses energy. A ‘C’ rating is commonly suggested as the minimum required for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for renting non-domestic properties by 2030.")
+
+# gloassary 
+st.header("Glossarry:")
+st.write("EPC (Energy Performance Certificate) - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
+st.write("EPC Score - A score usually iven from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (i.e. A+) is given to any building that is net zero.")
+st.write("IMD (Index of Multiple Deprivation) - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
 
 # Sidebar with search functionality
 st.sidebar.header('Search your Local Authority')
@@ -137,3 +146,8 @@ with st.expander("Download Data"):
                         help = 'Click here to download the data as a CSV file')
 # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
+
+with st.expander("See relevant links (including to public datasets)"):
+    st.write("IMD Data: " + " https://www.gov.uk/government/collections/english-indices-of-deprivation")
+    st.write("EPC Data: " + " https://epc.opendatacommunities.org/")
+    st.write("EPC related energy bill in parliament: " + " https://bills.parliament.uk/bills/3036 ")
