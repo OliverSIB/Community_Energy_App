@@ -70,9 +70,7 @@ st.title('Grouping and Searching DataFrame')
 
 # Display the selected or searched Local Authority --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if filter_option:
-    if search_local_authority:
-        st.write(f'### Filtered DataFrame for "{search_local_authority}":')
-    else:
+    if selected_local_authority:
         st.write(f'### Filtered DataFrame for "{selected_local_authority}":')
 else:
     st.write(f'### Entire DataFrame:')
