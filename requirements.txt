@@ -1,0 +1,10 @@
+streamlit
+plotly.express
+pandas
+os
+warnings
+folium
+streamlit_folium
+folium_static
+requests
+import 
