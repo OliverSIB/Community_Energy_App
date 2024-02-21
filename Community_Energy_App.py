@@ -20,7 +20,7 @@ df = pd.read_csv(fp)
 st.set_page_config(page_title="Community Energy App", page_icon=':globe_with_meridians:', layout = 'wide')
 
 #set title -----------------------------------------------------------------------------------
-st.title('Analyse the energy performance of community buildings in the UK!s')
+st.title('Analyse the energy performance of community buildings in the England!')
 #move title a little higher. uses div function to change padding (not working atm?)
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 #--------------------------------------------------------------------------------------------
