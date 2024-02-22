@@ -92,7 +92,7 @@ with col2:
 st.write()
 # Main content
 st.title("Let's explore the data:")
-st.write("**First, remember to select a local authority in the sidebar to the left. Or, if you want to view the whole dataset, leave it blank!**")
+st.write("**Remember to select a local authority in the sidebar to the left. Or, if you want to view the whole dataset, leave it blank!**")
 st.write("If you want to download the filtered data please use the 'Download Data' button at the bottom of the page. To download the whole dataset use the same button, but ensure all filters are turned off. If you wish to download any of the tables, you can do so with the icon found in the top right of each table.")
 
 # data for your Local Authority
