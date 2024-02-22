@@ -20,26 +20,26 @@ df = pd.read_csv(fp)
 st.set_page_config(page_title="Community Energy App", page_icon=':globe_with_meridians:', layout = 'wide')
 
 #set title -----------------------------------------------------------------------------------
-st.title('Analyse the energy performance of community buildings in the England!')
+st.title('Analyse the energy performance of community buildings in England')
 #move title a little higher. uses div function to change padding (not working atm?)
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 #--------------------------------------------------------------------------------------------
 
 st.header("What can you use this for?")
-st.write("What is this used for? This web application allows you to search for your local authority and see the energy performance (as indicated by the EPC rating) of the community buildings in that area, as well as some other data such as the relative deprivation of the area (indicated by IMD). For a glossary of terms please see the glossary in the sidebar.")
+st.write("This web application allows you to search your local authority for the Energy Performance Certificate (EPC) rating of the area’s community buildings. It also provides data such as the relative deprivation of the area, as indicated by the UK’s Index of Multiple Deprivation (IMD). Please see the glossary in the sidebar for definitions of the terms used.")
 
 # Introduction --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Have you read our article on community EPCs?")
-st.write("This web app is designed to interactively display the analysis from the article released by Social Investment Business titled ______. It displays publically available data on the energy performance of non-domestic community buildings in England. If you want to see more detailed analysis on this topic please find our article at _____________.")
+st.write("This web app is designed to interactively display the analysis from the article released by Social Investment Business titled ______. It displays publicly available data on the energy performance of non-domestic community buildings in England. If you want to see more detailed analysis on this topic please find our article at _____________.")
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 # about the cause --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Why is this important?")
-st.write("We believe it is critical to understand energy eficiency as we work towards meeting the law set in 2019 to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for Energy Performance Certificate (EPC) ratings. A ‘C’ rating is commonly suggested as the minimum required for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for renting non-domestic properties by 2030.")
+st.write("We believe it is critical to understand energy efficiency as we work towards meeting 2019 law to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for EPC ratings. For example, a ‘C’ rating is commonly suggested as the minimum requirement for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for rental of non-domestic properties by 2030.")
 
 st.header("Why Community Buildings?")
-st.write("Community buildings are at the centre of local communities and improving their energy efficiency ensures the future viability of these hubs. With many of them lacking the financila backing enjoyed by other enterprises it is crucial that we do not allow these organisations to be left behind. This data not only shows that help is sorely needed, but where to direct our attention, in order to reach the most struggling.")
+st.write("These buildings are at the centre of local communities and improving their energy efficiency ensures the future viability of these hubs. With many of them lacking the financial backing enjoyed by other enterprises it is crucial to ensure these organisations are not left behind. This data not only shows that help is sorely needed, but also where to direct our attention, in order to reach the most struggling organisations.")
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -80,9 +80,9 @@ st.sidebar.write("- IMD (Index of Multiple Deprivation) - a measure of relative 
 # add image -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 col1, col2 = st.columns((2))
 with col1:
-    st.image('image.jpg', caption='Community')
+    st.image('image.jpg')
 with col2:
-    st.image('image2.jpg', caption='Community')
+    st.image('image2.jpg')
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -93,11 +93,11 @@ st.write()
 # Main content
 st.title("Let's explore the data:")
 st.write("**First, remember to select a local authority in the sidebar to the left. Or, if you want to view the whole dataset, leave it blank!**")
-st.write("If you want to download the filtered data please use the 'Download Data' button at the bottom of the page. To download the whole dataset use the same buttom, but ensure all filters are turned off. If you wish to download any of the tables, you can do with the icon found in the top right of each table.")
+st.write("If you want to download the filtered data please use the 'Download Data' button at the bottom of the page. To download the whole dataset use the same button, but ensure all filters are turned off. If you wish to download any of the tables, you can do so with the icon found in the top right of each table.")
 
 # data for your Local Authority
 st.header("Data on your Local Authority:")
-st.write("You will find below a breakdown of the energy perfomance of your selected local authority, including general information such as the number of community buildings with EPCs, the average IMD of these buildings, as well as breakdowns of the EPCs in this area.")
+st.write("Below, you can find a breakdown of your selected local authority’s energy performance. This includes general information such as the number of community buildings with EPC’s, the average IMD of these buildings, and the breakdown of EPCs in this area.")
 # Display the selected or searched Local Authority --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if filter_option:
     if selected_local_authority:
@@ -185,7 +185,7 @@ selected_region_df = df[df['Region'].isin(filtered_df['Region'].unique())]
 
 # show region data for selection # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("How do you compare to your region?")
-st.write("You will find below the same data fields, but for the region of the Local Authority you selected. This can help you compare how one LA performs compared to the rest in its part of the country.")
+st.write("To help you compare how one local authority performs versus the rest of the region, you can use these same data fields and input your selected LA.")
 your_region = filtered_df['Region'].unique()
 st.text('Selected region: ' + str(your_region))
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
