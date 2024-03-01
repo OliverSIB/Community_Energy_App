@@ -114,15 +114,28 @@ with col1:
     count_EPC = filtered_df['BUILDING_REFERENCE_NUMBER'].count()
     st.write('Number of EPCs:', count_EPC)
     st.write('Most Common EPC:', mode_EPC)
+    C_data = filtered_df[filtered_df['ASSET_RATING_BAND'].isin(['A+', 'A', 'B', 'C'])]
+    count = len(filtered_df) - len(C_data)
+    st.write("Number of EPCs in your LA that do not reach a 'C' rating:", count)
 with col2:
     imd_epc = filtered_df["IMD"].mean().round(0)
     st.write('Mean IMD:', imd_epc)
     floor_epc = filtered_df['FLOOR_AREA'].mean().round(1)
     st.write('Mean floor area (m2)', floor_epc)
+    B_data = filtered_df[filtered_df['ASSET_RATING_BAND'].isin(['A+', 'A', 'B'])]
+    count2 = len(filtered_df) - len(B_data)
+    st.write("Number of EPCs in your LA that do not reach a 'B' rating:", count2)
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
+# Select the 'ASSET_RATING_BAND' column and filter values A+, A, or B
 
+
+# Count the number of rows in the filtered data
+
+
+# Print the result
+print(f"Number of values in ASSET_RATING_BAND column that are A+, A, or B: {count}")
 
 
 # Calculate percentage with one decimal place and create a bar chart for ASSET_RATING_BAND breakdown --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -198,11 +211,17 @@ with col1:
     region_count_EPC = selected_region_df['BUILDING_REFERENCE_NUMBER'].count()
     st.write('Number of EPCs:', region_count_EPC)
     st.write('Most Common EPC:', region_mode_EPC)
+    reg_C_data = selected_region_df[selected_region_df['ASSET_RATING_BAND'].isin(['A+', 'A', 'B', 'C'])]
+    r_count = len(selected_region_df) - len(reg_C_data)
+    st.write("Number of EPCs in your region that do not reach a 'C' rating:", r_count)
 with col2:
     region_imd_epc = selected_region_df["IMD"].mean().round(0)
     st.write('Mean IMD:', region_imd_epc)
     region_floor_epc = selected_region_df['FLOOR_AREA'].mean().round(1)
     st.write('Mean floor area (m2)', region_floor_epc)
+    reg_B_data = selected_region_df[selected_region_df['ASSET_RATING_BAND'].isin(['A+', 'A', 'B'])]
+    r_count2 = len(selected_region_df) - len(reg_B_data)
+    st.write("Number of EPCs in your region that do not reach a 'C' rating:", r_count2)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
