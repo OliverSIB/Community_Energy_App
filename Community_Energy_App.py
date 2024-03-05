@@ -366,3 +366,6 @@ with st.expander("See relevant links (including to public datasets)"):
     st.write("EPC Data: " + " https://epc.opendatacommunities.org/")
     st.write("EPC related energy bill in parliament: " + " https://bills.parliament.uk/bills/3036 ")
 
+
+st.markdown("")
+st.write("Please note, some EPC locations could not be matched and so totals may not add up. For any enquiries please contact oliver.hughes@sibgroup.org.uk. Thank you.")
