@@ -20,13 +20,15 @@ df = pd.read_csv(fp)
 st.set_page_config(page_title="Community Energy App", page_icon=':globe_with_meridians:', layout = 'wide')
 
 #set title -----------------------------------------------------------------------------------
-st.title('Analyse the energy performance of community buildings in England')
+st.title('Community Energy Performance Calculator')
 #move title a little higher. uses div function to change padding (not working atm?)
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 #--------------------------------------------------------------------------------------------
 
 st.header("What can you use this for?")
-st.write("This web application allows you to search your local authority for the Energy Performance Certificate (EPC) rating of the area’s community buildings. It also provides data such as the relative deprivation of the area, as indicated by the UK’s Index of Multiple Deprivation (IMD). Please see the glossary in the sidebar for definitions of the terms used.")
+st.write("This data tool helps you to find and understand the energy performance of community buildings. \
+You can search the data by local authority to see the number of community buildings in that area. You will see their Energy Performance Certificate ratings and the relative deprivation of the area.\
+ It uses publicly available data on the energy performance of non-domestic community buildings in England from the Non-Domestic EPC register and the UK’s Index of Multiple Deprivation.")
 
 # Introduction --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("Have you read our article on community EPCs?")
@@ -69,9 +71,9 @@ else:
 
 # glossary --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.sidebar.header("Glossary:")
-st.sidebar.write("- EPC (Energy Performance Certificate) - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
-st.sidebar.write("- EPC Score - A score given from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (aka. A+) is given to any building that is net zero. Please note, it is possible to be given a score outide the 0-150 range if your building is an outlier in some way, but this does apply to the majority of buildings.")
-st.sidebar.write("- IMD (Index of Multiple Deprivation) - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
+st.sidebar.write("- **EPC (Energy Performance Certificate)** - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
+st.sidebar.write("- **EPC Score** - A score given from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (aka. A+) is given to any building that is net zero. Please note, it is possible to be given a score outide the 0-150 range if your building is an outlier in some way, but this does apply to the majority of buildings.")
+st.sidebar.write("- **IMD (Index of Multiple Deprivation)** - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -89,11 +91,32 @@ with col2:
 
 
 
+st.header("Using the calculator")
+st.write("""
+**1.	Choose your area.**
+- Tick ‘Filter Data’.
+- Type the local authority that you want to look at in the search box.
+         
+**2.	View the data.**
+ - The data for your chosen local authority area will display. You can view the number and type of Energy Performance Certificates for community buildings. You can also view the relative deprivation of the area.
+
+**3.	Compare your area.**
+- You can also view data to compare your chosen local authority area to others in the wider region. For example, you can view comparative EPC data and IMD data for other local authorities within the region.
+""")
+
+
+
+
+
+st.markdown("")
+
 st.write()
 # Main content
 st.title("Let's explore the data:")
 st.write("**Remember to select a local authority in the sidebar to the left. Or, if you want to view the whole dataset, leave it blank!**")
 st.write("If you want to download the filtered data please use the 'Download Data' button at the bottom of the page. To download the whole dataset use the same button, but ensure all filters are turned off. If you wish to download any of the tables, you can do so with the icon found in the top right of each table.")
+
+st.markdown("")
 
 # data for your Local Authority
 st.header("Data on your Local Authority:")
@@ -105,6 +128,8 @@ if filter_option:
 else:
     st.write(f'### Entire DataFrame:')
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+st.markdown("")
 
 # breakdown for LA --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -127,15 +152,11 @@ with col2:
     st.write("Number of EPCs in your LA that do not reach a 'B' rating:", count2)
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+st.markdown("")
 
-# Select the 'ASSET_RATING_BAND' column and filter values A+, A, or B
-
-
-# Count the number of rows in the filtered data
+st.markdown("")
 
 
-# Print the result
-print(f"Number of values in ASSET_RATING_BAND column that are A+, A, or B: {count}")
 
 
 # Calculate percentage with one decimal place and create a bar chart for ASSET_RATING_BAND breakdown --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -144,7 +165,7 @@ epc_df['Percentage'] = (epc_df['BUILDING_REFERENCE_NUMBER'] / epc_df['BUILDING_R
 
 fig = px.bar(epc_df, x="ASSET_RATING_BAND", y="Percentage", text="Percentage",
              labels={"Percentage": "Percentage of Total"},
-             title="Percentage of Total by Asset Rating Band (EPC)")
+             title="Percentage of EPCs by Rating Band")
 fig.update_traces(texttemplate='%{text}%', textposition='outside')
 st.plotly_chart(fig, use_container_width=True, height=200)
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -194,6 +215,8 @@ with col2:
 selected_region_df = df[df['Region'].isin(filtered_df['Region'].unique())]
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+st.markdown("---")
 
 
 # show region data for selection # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -262,8 +285,46 @@ with col2:
 
 
 
+st.markdown("---")
+
+st.header("Further information")
+st.write("""
+         **Community energy performance research**
+         
+    The Social Investment Business has conducted research to analyse the energy efficiency of community buildings across England.
+    The research showed that:
+    - over 7,300 community buildings in England do not meet basic energy efficiency standards
+    - neighbourhoods with higher levels of deprivation, the community buildings are more energy inefficient
+    - the North of England has fewer energy efficient community buildings than the South
+    
+         [Link to research report]
+
+         
+""")
 
 
+
+st.markdown("---")
+
+
+st.write("""
+**About energy performance of community buildings**
+         
+Energy Performance Certificate (EPC) ratings are a measure of how efficiently a building uses energy. As the UK works towards meeting the law set in 2019 to reach Net Zero by 2050, there are likely to be incremental rule changes for EPC ratings. 
+
+A ‘C’ rating is commonly suggested as the minimum required for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for renting non-domestic properties by 2030.
+
+Community buildings are vital hubs for people to come together and for the delivery of local services. The Social Investment Business’s research highlights the need to targeted investment to improve the energy efficiency of these buildings to ensure their future viability and support our most vulnerable communities.
+""")
+
+
+st.markdown("---")
+
+
+
+st.write("""**The Community Energy Performance calculator was created by the Social Investment Business using publicly available data.**
+         
+Details of the full data and methodology are available below:""")
 
 
 
@@ -280,8 +341,10 @@ with st.expander("Download Data"):
     csv = filtered_df.to_csv(index = False).encode('utf-8')
     st.download_button("Click Here", data = csv, file_name = "Data.csv", mime = "text/csv",
                         help = 'Click here to download the data as a CSV file')
-# ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
+
+
 with st.expander("See full methodology"):
     st.write("Utilising public access to national data, we took the 1.29 million non-domestic EPCs available to us in December of 2023, with an EPC registered before the 1st July 2023 (our dataset ranges from 24/12/2007 to 30/06/2023), we applied filtering to the listed ‘Property Type’ so that it included only those that are community related. Please note this data does not include every community building in England. Buildings are not obligated to get an EPC assessment if they are not planning to market that building, meaning a community organisation that has owned a building since before 2008 would not appear on the EPC register. We filtered our data to include only the most EPCs for each building, this is so we have as current a view of the state of the sector as we can. To increase our confidence that we were focussing on the social sector, we completed a manual check of a random sample of 301 organisations to check whether they are community-led or private. The sample shows a low proportion of private businesses and is sufficiently large a sample to conclude that there is a low prevalence throughout the dataset, whilst all other businesses have a clear social purpose. We then merged this data with the publicly accessible IMD data on postcode. Our resulting dataset has 13,187 community and day centre buildings, offering a comprehensive look at energy efficiency trends. Then to ensure this data is representative of the not-for-profit sector, we conducted a word search inspection in python which showed common buildings including Churches, community centres, nurseries, day centres, etc.")
 
