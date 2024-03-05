@@ -71,9 +71,15 @@ else:
 
 # glossary --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.sidebar.header("Glossary:")
-st.sidebar.write("- **EPC (Energy Performance Certificate)** - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
-st.sidebar.write("- **EPC Score** - A score given from 0 - 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (aka. A+) is given to any building that is net zero. Please note, it is possible to be given a score outide the 0-150 range if your building is an outlier in some way, but this does apply to the majority of buildings.")
-st.sidebar.write("- **IMD (Index of Multiple Deprivation)** - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).")
+st.sidebar.write("""
+                 **EPC (Energy Performance Certificate)** 
+                 - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
+
+                **EPC Score** 
+                 - A score given from 0 to 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (aka. A+) is given to any building that is net zero. Please note, it is possible to be given a score outide the 0-150 range if your building is an outlier in some way, but this does apply to the majority of buildings.")
+
+                **IMD (Index of Multiple Deprivation)** 
+                 - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).""")
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -124,7 +130,7 @@ st.write("Below, you can find a breakdown of your selected local authority’s e
 # Display the selected or searched Local Authority --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if filter_option:
     if selected_local_authority:
-        st.write(f'### Filtered Data for "{selected_local_authority}":')
+        st.write(f'#### Filtered Data for "{selected_local_authority}":')
 else:
     st.write(f'### Entire DataFrame:')
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -223,7 +229,14 @@ st.markdown("---")
 st.header("How do you compare to your region?")
 st.write("To help you compare how one local authority performs versus the rest of the region, you can use these same data fields and input your selected LA.")
 your_region = filtered_df['Region'].unique()
-st.text('Selected region: ' + str(your_region))
+
+
+
+if filter_option:
+    if selected_local_authority:
+        st.write(f'#### Selected region: ' + str(your_region))
+else:
+    st.write(f'### Entire DataFrame:')
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
