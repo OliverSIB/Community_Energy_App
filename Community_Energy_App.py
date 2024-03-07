@@ -25,23 +25,11 @@ st.title('Community Energy Performance Calculator')
 st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allow_html=True)
 #--------------------------------------------------------------------------------------------
 
+# Introduction --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 st.header("What can you use this for?")
 st.write("This data tool helps you to find and understand the energy performance of community buildings. \
 You can search the data by local authority to see the number of community buildings in that area. You will see their Energy Performance Certificate ratings and the relative deprivation of the area.\
- It uses publicly available data on the energy performance of non-domestic community buildings in England from the Non-Domestic EPC register and the UK’s Index of Multiple Deprivation.")
-
-# Introduction --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-st.header("Have you read our article on community EPCs?")
-st.write("This web app is designed to interactively display the analysis from the article released by Social Investment Business titled ______. It displays publicly available data on the energy performance of non-domestic community buildings in England. If you want to see more detailed analysis on this topic please find our article at _____________.")
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-# about the cause --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-st.header("Why is this important?")
-st.write("We believe it is critical to understand energy efficiency as we work towards meeting 2019 law to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for EPC ratings. For example, a ‘C’ rating is commonly suggested as the minimum requirement for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for rental of non-domestic properties by 2030.")
-
-st.header("Why Community Buildings?")
-st.write("These buildings are at the centre of local communities and improving their energy efficiency ensures the future viability of these hubs. With many of them lacking the financial backing enjoyed by other enterprises it is crucial to ensure these organisations are not left behind. This data not only shows that help is sorely needed, but also where to direct our attention, in order to reach the most struggling organisations.")
+It uses publicly available data on the energy performance of non-domestic community buildings in England from the Non-Domestic EPC register and the UK’s Index of Multiple Deprivation.")
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -73,10 +61,10 @@ else:
 st.sidebar.header("Glossary:")
 st.sidebar.write("""
                  **EPC (Energy Performance Certificate)** 
-                 - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).")
+                 - A certificate issued to a building by an accredited assessor, rating the buildings’ energy efficiency  from A+ (most efficient) to G (least efficient).
 
                 **EPC Score** 
-                 - A score given from 0 to 150 to determine the EPC letter band of a building. For example; 0-25 = A. A score 0 or below (aka. A+) is given to any building that is net zero. Please note, it is possible to be given a score outide the 0-150 range if your building is an outlier in some way, but this does apply to the majority of buildings.")
+                 - A score given from 0 to 150 to determine the EPC letter band of a building. For example; 1-25 = A. If a building is scored 0 or below (aka. A+) it means that it is net zero. Please note, it is also possible to be given a score above 150 if the building is an outlier, but this does not apply to the majority of buildings.
 
                 **IMD (Index of Multiple Deprivation)** 
                  - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).""")
@@ -301,6 +289,28 @@ with col2:
 st.markdown("---")
 
 st.header("Further information")
+
+st.markdown("")
+
+
+st.write(f'##### Have you read our article on community EPCs?')
+st.write("This web app is designed to interactively display the analysis from the article released by Social Investment Business titled ______. It displays publicly available data on the energy performance of non-domestic community buildings in England. If you want to see more detailed analysis on this topic please find our article at _____________.")
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# about the cause --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+st.write(f"##### Why is this important?")
+st.write("We believe it is critical to understand energy efficiency as we work towards meeting 2019 law to reach Net Zero by 2050. To deliver on Net Zero there are likely to be incremental rule changes for EPC ratings. For example, a ‘C’ rating is commonly suggested as the minimum requirement for sale or let in proposed legislation of domestic properties by 2035, whilst a minimum of ‘B’ has been suggested for rental of non-domestic properties by 2030.")
+
+st.write(f"##### Why Community Buildings?")
+st.write("These buildings are at the centre of local communities and improving their energy efficiency ensures the future viability of these hubs. With many of them lacking the financial backing enjoyed by other enterprises it is crucial to ensure these organisations are not left behind. This data not only shows that help is sorely needed, but also where to direct our attention, in order to reach the most struggling organisations.")
+
+
+
+st.markdown("---")
+
+
+
 st.write("""
          **Community energy performance research**
          
