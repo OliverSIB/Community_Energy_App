@@ -378,4 +378,4 @@ with st.expander("See relevant links (including to public datasets)"):
 
 
 st.markdown("")
-st.write("Please note, some EPC locations could not be matched and so totals may not add up. For any enquiries please contact oliver.hughes@sibgroup.org.uk. Thank you.")
+st.write("Please note, some EPC locations could not be matched, so totals may not add up. For any enquiries please contact oliver.hughes@sibgroup.org.uk. Thank you.")
