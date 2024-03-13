@@ -29,7 +29,7 @@ st.markdown('<style>div.block-container{padding-top:1rem;}</style>', unsafe_allo
 st.header("What can you use this for?")
 st.write("This data tool helps you to find and understand the energy performance of community buildings. \
 You can search the data by local authority to see the number of community buildings in that area. You will see their Energy Performance Certificate ratings and the relative deprivation of the area.\
-It uses publicly available data on the energy performance of non-domestic community buildings in England from the Non-Domestic EPC register and the UK’s Index of Multiple Deprivation.")
+ It uses publicly available data on the energy performance of non-domestic community buildings in England from the Non-Domestic EPC register and the Index of Multiple Deprivation.")
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ st.sidebar.write("""
                  - A score given from 0 to 150 to determine the EPC letter band of a building. For example; 1-25 = A. If a building is scored 0 or below (aka. A+) it means that it is net zero. Please note, it is also possible to be given a score above 150 if the building is an outlier, but this does not apply to the majority of buildings.
 
                 **IMD (Index of Multiple Deprivation)** 
-                 - a measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).""")
+                 - A measure of relative deprivation (published by the Ministry of Housing, Communities & Local Government) ranked from 1 (most deprived) to 10 (least deprived).""")
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -99,8 +99,8 @@ st.write("""
 """)
 
 
-
 st.markdown("---")
+
 
 st.markdown("")
 
@@ -354,6 +354,7 @@ Details of the full data and methodology are available below:""")
 
 # Display the filtered DataFrame based on search ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 with st.expander('View Data'):
+    filtered_df = filtered_df.drop(columns=['Postcode'])
     st.write(filtered_df)
 
 
