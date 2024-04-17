@@ -294,8 +294,7 @@ st.markdown("")
 
 
 st.write(f'##### Have you read our article on community EPCs?')
-st.write("This web app is designed to interactively display the analysis from the article released by Social Investment Business titled 'Energy efficiency of community
-buildings across England: A descriptive analysis'. It displays publicly available data on the energy performance of non-domestic community buildings in England. If you want to see more detailed analysis on this topic please find our article at _____________.")
+st.write("This web app is designed to interactively display the analysis from the article released by Social Investment Business titled 'Energy efficiency of community buildings across England: A descriptive analysis'. It displays publicly available data on the energy performance of non-domestic community buildings in England. If you want to see more detailed analysis on this topic please find our article at _____________.")
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
